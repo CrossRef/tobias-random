@@ -1,0 +1,63 @@
+!!!
+%html
+  %head
+    %link{:rel => "stylesheet", :href => "bootstrap.min.css", :type => "text/css", :media => "screen"}
+    %title CrossRef Lab's ranDOIm
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{"href" => "http://labs.crossref.org"} CrossRef Labs
+    .container
+      .page-header{"style" => "margin-top: 60px"}
+        %h1 ranDOIm
+      %p Get random DOIs as a JSON list. Just hit the URL:
+      %pre
+        :preserve
+          $ curl http://random.labs.crossref.org/dois
+
+          [
+            "10.1111/j.1468-0084.1964.mp27004006.x",
+            "10.1109/UKSIM.2011.38",
+            "10.1097/00007890-200407271-00998",
+            "10.1136/bmj.1.2518.E53",
+            "10.3998/3336451.0006.102",
+            "10.2307/20468071",
+            "10.1371/journal.pone.0000038.g004",
+            "10.2307/337445",
+            "10.1109/PHO.2011.6110750",
+            "10.1002/(SICI)1097-0010(199604)70:4<422::AID-JSFA514>3.0.CO;2-5",
+            "10.1112/jlms/s1-4.1.18",
+            "10.1201/9780203641965.b",
+            "10.1115/1.2905912",
+            "10.1088/0953-8984/11/10/009",
+            "10.1180/minmag.1923.020.102.03",
+            "10.5688/ajpe756121",
+            "10.4018/9781605661742.ch006",
+            "10.1136/bjo.5.8.378",
+            "10.1126/science.288.5465.431b",
+            "10.1111/j.1096-3642.2006.00206.x"
+          ]
+
+      %h2 Parameters
+      %p Stick these in as query parameters. e.g. ?count=15&from=1900&to=1910  
+      %dl
+        %dt count
+        %dd The number of returned random DOIs. Max 1000, default 20.
+        %dt to
+        %dd Only DOIs published before and including year /to/.
+        %dt from
+        %dd Only DOIs published after and including year /from/.
+        %dt issn
+        %dd Only journal article DOIs published in a journal with /issn/.
+        %dt title
+        %dd Only journal article DOIs published in journal with exact full title /title/.
+        %dt discipline
+        %dd only journal article DOIs published in a journal with discpline category. TODO
+
+      %h2 Randomisation Process
+      %p A random distribution of rational values, 0 - 1, has been assigned to our DOI records.
+
+      %h2 Caveats 
+      %p 
+        DOIs for works published after March 2012 is not available.
