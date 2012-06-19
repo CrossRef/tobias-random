@@ -40,23 +40,61 @@
           ]
 
       %h2 Parameters
-      %p Stick these in as query parameters. e.g. ?count=15&from=1900&to=1910  
+      %p 
+        Stick these in as query parameters. e.g. 
+        %code http://random.labs.crossref.org/dois?count=15&from=1900&to=1910  
       %dl
-        %dt count
-        %dd The number of returned random DOIs. Max 1000, default 20.
-        %dt to
-        %dd Only DOIs published before and including year /to/.
-        %dt from
-        %dd Only DOIs published after and including year /from/.
-        %dt issn
-        %dd Only journal article DOIs published in a journal with /issn/.
-        %dt title
-        %dd Only journal article DOIs published in journal with exact full title /title/.
-        %dt discipline
-        %dd only journal article DOIs published in a journal with discpline category. TODO
+        %dt 
+          %code count
+        %dd 
+          The number of returned random DOIs. Maximum is 1000, default 20. Note that
+          a request for 1000 random DOIs will take a few seconds to complete, whereas
+          a request for 20 will take ~100 milliseconds.
+        %dt 
+          %code to
+        %dd Return only DOIs published before and including the given year.
+        %dt 
+          %code from
+        %dd Return only DOIs published after and including the given year.
+        %dt 
+          %code issn
+        %dd 
+          Return only journal article DOIs published in a journal with
+          given ISSN. Provide ISSNs in the form 
+          %code xxxx-xxxx
+          :plain
+            . However, sometimes this form won't match because of how metadata has
+            been submitted to CrossRef. If it doesn't, try the form 
+          %code xxxxxxxx
+          :plain
+            .
+        %dt 
+          %code
+            title
+        %dd 
+          Return only journal article DOIs published in journal with the exact full title given.
+          %code title 
+          and 
+          %code issn 
+          options are mutually exclusive and
+          %code title 
+          will trump
+          %code issn
+          :plain
+            . Unfortunately title isn't very useful since an exact match must be made with the 
+            text of the journal title in the form it has been submitted to CrossRef. We recommend using
+          %code issn 
+          over 
+          %code title
+          :plain
+            .
 
       %h2 Randomisation Process
-      %p A random distribution of rational values, 0 - 1, has been assigned to our DOI records.
+      %p 
+        A random distribution of rational values, 0 to 1, has been assigned to our DOI records.
+        We use this as an index to look up a random rational between 0 and 1 on each request,
+        and take a series of DOIs from that point. Selection on year, title and ISSN
+        filters out records before a lookup on the random index.
 
       %h2 Caveats 
       %p 

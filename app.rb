@@ -26,10 +26,14 @@ helpers do
   end
 
   def doi_query count, query_data
-    puts query_data
-
     query_data[:random_index] = {'$gt' => rand}
     docs = settings.dois.find(query_data, {:limit => count})
+
+    if docs.count(true).zero?
+      query_data[:random_index] = {'$lt' => rand}
+      docs = settings.dois.find(query_data, {:limit => count})
+    end
+
     docs.map { |doc| doc['doi'] }
   end
 end
@@ -57,9 +61,6 @@ get '/dois' do
   elsif params.key? 'issn'
     query[:type] = 'journal_article'
     query['journal.p_issn'] = params['issn']
-  elsif params.key? 'discipline'
-    query[:type] = 'journal_article'
-    # todo
   end
 
   if params.key? 'to'
