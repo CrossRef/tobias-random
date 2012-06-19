@@ -1,0 +1,29 @@
+<VirtualHost *:80>
+  ServerName            random.labs.crossref.org
+  AllowEncodedSlashes   On
+  UseCanonicalName      Off
+
+  DocumentRoot          /home/kward/tobias-random/public
+  
+  <Directory /home/kward/tobias-random/public>
+    Allow from all
+    Options -MultiViews
+  </Directory>
+
+  PassengerMinInstances 4
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName            randoim.labs.crossref.org
+  AllowEncodedSlashes   On
+  UseCanonicalName      Off
+
+  DocumentRoot          /home/kward/tobias-random/public
+  
+  <Directory /home/kward/tobias-random/public>
+    Allow from all
+    Options -MultiViews
+  </Directory>
+
+  PassengerMinInstances 4
+</VirtualHost>
