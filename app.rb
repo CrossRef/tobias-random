@@ -26,12 +26,16 @@ helpers do
   end
 
   def doi_query count, query_data
-    query_data[:random_index] = {'$gt' => rand}
-    docs = settings.dois.find(query_data, {:limit => count})
+    query_data[:random_index] = {'$gte' => rand}
+    options = {
+      :limit => count,
+      :sort => [:random_index, 1]
+    }
+    docs = settings.dois.find(query_data, options)
 
-    if docs.count(true).zero?
+    unless docs.has_next?
       query_data[:random_index] = {'$lt' => rand}
-      docs = settings.dois.find(query_data, {:limit => count})
+      docs = settings.dois.find(query_data, options)
     end
 
     docs.map { |doc| doc['doi'] }
