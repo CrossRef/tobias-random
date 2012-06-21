@@ -42,7 +42,7 @@
       %h2 Parameters
       %p 
         Stick these in as query parameters. e.g. 
-        %code http://random.labs.crossref.org/dois?count=15&from=1900&to=1910  
+        %code http://random.labs.crossref.org/dois?count=15&type=conference_paper
       %dl
         %dt 
           %code count
@@ -56,39 +56,76 @@
         %dt 
           %code from
         %dd Return only DOIs published after and including the given year.
-        %dt 
-          %code issn
-        %dd 
-          Return only journal article DOIs published in a journal with
-          given ISSN. Provide ISSNs in the form 
-          %code xxxx-xxxx
+        %dt
+          %code type
+        %dd
+          Return DOIs of a certain type. Must be one of these unixref derived types:
+          %code journal_article
+          ,
+          %code conference_paper
+          ,
+          %code report_paper
+          ,
+          %code journal_issue
+          ,
+          %code journal
+          ,
+          %code book
+          ,
+          %code book_series
+          ,
+          %code book_set
+          ,
+          %code dissertation
+          ,
+          %code content_item
+          ,
+          %code series
+          or
+          %code standard
           :plain
-            . However, sometimes this form won't match because of how metadata has
-            been submitted to CrossRef. If it doesn't, try the form 
-          %code xxxxxxxx
-          :plain
-            .
-        %dt 
-          %code
-            title
-        %dd 
-          Return only journal article DOIs published in journal with the exact full title given.
-          %code title 
-          and 
-          %code issn 
-          options are mutually exclusive and
-          %code title 
-          will trump
-          %code issn
-          :plain
-            . Unfortunately title isn't very useful since an exact match must be made with the 
-            text of the journal title in the form it has been submitted to CrossRef. We recommend using
-          %code issn 
-          over 
-          %code title
-          :plain
-            .
-
+            .       
+      %p 
+        Setting any of the following parameters forces
+        %code type
+        to
+        %code journal_article
+        :plain
+          :
+        %dl
+          %dt 
+            %code issn
+          %dd 
+            Return only journal article DOIs published in a journal with
+            given ISSN. Provide ISSNs in the form 
+            %code xxxx-xxxx
+            :plain
+              . However, sometimes this form won't match because of how metadata has
+              been submitted to CrossRef. If it doesn't, try the form 
+            %code xxxxxxxx
+            :plain
+              .
+          %dt 
+            %code
+              title
+          %dd 
+            Return only journal article DOIs published in journal with the exact full title given.
+            %code title 
+            and 
+            %code issn 
+            options are mutually exclusive and
+            %code title 
+            will trump
+            %code issn
+            :plain
+              . Unfortunately title isn't very useful since an exact match must be made with the 
+              text of the journal title in the form it has been submitted to CrossRef. We recommend using
+            %code issn 
+            over 
+            %code title
+            :plain
+              .
+          
       %h2 Randomisation Process
       %p 
         A random distribution of values, 0 to 1, has been assigned to our DOI records.
