@@ -1,4 +1,4 @@
 {
-  "mongo_host": "192.168.1.152",
+  "mongo_host": "5.9.51.150",
   "mongo_db": "crossref"
 }
