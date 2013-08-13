@@ -72,7 +72,8 @@ get '/dois' do
   end
 
   if params.key? 'from'
-    query['published.year'] = {'$gte' => params['from'].to_i}
+    query['published.year'] ||= {}
+    query['published.year']['$gte'] = params['from'].to_i
   end
 
   json doi_query(count, query)
